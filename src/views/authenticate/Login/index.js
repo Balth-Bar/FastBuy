@@ -11,8 +11,8 @@ const Login = ({
 
 }) => {
     const [hide, setHide] = useState(true)
-    const [user, setUser] = useState("Juan");
-    const [pass, setPass] = useState("12345");
+    const [user, setUser] = useState();
+    const [pass, setPass] = useState();
 
     const toast = useToast();
 

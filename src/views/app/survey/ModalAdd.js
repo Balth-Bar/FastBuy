@@ -58,6 +58,7 @@ const AddModal = ({
         setTotal(total + price * amount)
         setAmount(0)
         setAuxiliarModal(!auxiliarModal)
+        setShowModal(!showModal)
     }
 
     const showAlert = (title, description, status) => {
@@ -157,7 +158,7 @@ const AddModal = ({
                                     color="#FFF"
                                     fontSize={17}
                                 >
-                                    Enviar
+                                    Agregar
                                 </Text>
                             </View>
 

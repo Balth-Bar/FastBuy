@@ -3,6 +3,12 @@ export const formatQuantity = Quantity => {
 }
 
 export const formartDate = (date) => {
-    const formatDate = new Date(date).toUTCString();
-    return formatDate
+    if (typeof (date) !== "object") {
+        date = new Date(date)
+    }
+    const setDate = parseInt(date)
+    const formatDate = date.toISOString()
+    const formartDate = formatDate.split("T")
+    return formartDate[0]
+
 }
