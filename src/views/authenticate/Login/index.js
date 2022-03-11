@@ -11,12 +11,12 @@ const Login = ({
 
 }) => {
     const [hide, setHide] = useState(true)
-    const [user, setUser] = useState("");
-    const [pass, setPass] = useState("");
+    const [user, setUser] = useState("Juan");
+    const [pass, setPass] = useState("12345");
 
     const toast = useToast();
 
-    const { signIn, isLoading } = useContext(AppContext)
+    const { signIn, isLoading, orderData } = useContext(AppContext)
 
     const showAlert = (title, description, status) => {
         toast.show({

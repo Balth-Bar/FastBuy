@@ -21,18 +21,26 @@ const AppState = (props) => {
                         isLogged: false,
                         userToken: null,
                     };
-                case "NAVIGATE":
+                case 'SET_DATA':
                     return {
                         ...prevState,
-                        colors: action.colors
+                        apiData: action.apiData
+                    };
+                case 'SET_ORDER':
+                    return {
+                        ...prevState,
+                        orderData: action.orderData
                     }
+
             }
         },
         {
             isLoading: true,
             isLogged: false,
             userToken: null,
-            userName: ""
+            userName: "",
+            apiData: [],
+            orderData: []
         }
     )
 
@@ -42,6 +50,8 @@ const AppState = (props) => {
                 dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', userName: user });
             },
             signOut: () => dispatch({ type: 'SIGN_OUT' }),
+            setData: (data) => dispatch({ type: 'SET_DATA', apiData: data }),
+            setOrderData: (orderData) => dispatch({ type: 'SET_ORDER', orderData }),
         }),
         []
     );

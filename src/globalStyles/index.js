@@ -48,6 +48,7 @@ const globalStyles = StyleSheet.create({
         backgroundColor: "#022760",
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
+        justifyContent: "space-evenly"
     },
 
 })

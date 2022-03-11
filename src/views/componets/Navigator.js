@@ -7,7 +7,6 @@ import Login from '../authenticate/Login'
 import { AppContext } from '../../../context/appContext/appState';
 import InitScreen from '../app/initScreen';
 import { Text } from 'native-base';
-import NavBar from './NavBar';
 import History from '../app/history';
 import Sales from '../app/sales';
 import Survey from '../app/survey';
@@ -34,7 +33,7 @@ const Home = () => {
             }}
         >
             <Tab.Screen name="Pedidos" component={InitScreen} />
-            <Tab.Screen name="Historial" component={History} />
+            {/* <Tab.Screen name="Historial" component={History} /> */}
             <Tab.Screen name="Ventas" component={Sales} />
         </Tab.Navigator>
     )
