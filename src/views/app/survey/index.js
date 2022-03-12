@@ -81,7 +81,7 @@ const Survey = ({
 
     return (
         <ScrollView>
-            <View View flex={1} bg={"#f5f5f5"} justifyContent="center" mt={"15%"} >
+            <View View flex={1} bg={"#f5f5f5"} mt={"15%"} >
 
                 <Text
                     fontSize={"2xl"}
@@ -195,28 +195,50 @@ const Survey = ({
                     </Text>
                 </View>
                 <Button
-                    style={globalStyles.buttonStyle}
-                    onPress={() => validateData()}
+                    style={{ position: "absolute", width: 10, alignSelf: "center", backgroundColor: "#022760" }}
+                    onPress={() => { validateData() }}
+                    disabled
+
                 >
-                    <Text
+                    {/* <Text
+                        w={0}
+                        h={0}
                         textAlign={"center"}
                         color="#FFF"
                         fontSize={"md"}
                     >
                         Enviar
-                    </Text>
+                    </Text> */}
                 </Button>
+                <View>
+                    <AnimatedButton
+                        onPress={() => validateData()}
+                    >
+                        <View style={globalStyles.buttonStyle}
+                        >
+                            <Text
+                                textAlign={"center"}
+                                color="#FFF"
+                                fontSize={"md"}
+                            >
+                                Enviar
+                            </Text>
+                        </View>
 
-                <AddModal
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                    apiData={apiData}
-                    setProducts={setProducts}
-                    products={products}
-                    setTotal={setTotal}
-                    total={total}
-                />
+                    </AnimatedButton>
+                </View>
+
             </View >
+
+            {showModal && (<AddModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                apiData={apiData}
+                setProducts={setProducts}
+                products={products}
+                setTotal={setTotal}
+                total={total}
+            />)}
         </ScrollView>
     );
 }
