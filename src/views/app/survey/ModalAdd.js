@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Modal, Image, Pressable, ScrollView, useToast } from 'native-base';
+import { Text, View, Image, Pressable, ScrollView, useToast } from 'native-base';
 import AnimatedButton from '../../shared/AnimatedButton';
 import globalStyles from '../../../globalStyles';
-import { TextInput, Alert } from 'react-native';
+import { TextInput, Alert, Modal } from 'react-native';
 
 const AddModal = ({
     showModal,
@@ -61,21 +61,26 @@ const AddModal = ({
         setShowModal(!showModal)
     }
 
-    const showAlert = (title, description, status) => {
-        toast.show({
-            placement: "bottom",
-            title,
-            description,
-            status,
-        })
-    }
+    // const showAlert = (title, description, status) => {
+    //     toast.show({
+    //         placement: "bottom",
+    //         title,
+    //         description,
+    //         status,
+    //     })
+    // }
 
     return (
         <>
-            <Modal isOpen={showModal} onClose={() => setShowModal(!showModal)} >
-                <Modal.Content w={"100%"} bg="#d4e0f5">
+            <Modal visible={showModal} onRequestClose={() => setShowModal(!showModal)}
+                animationType="slide"
+                transparent={true}
+            >
+                {/* <Modal.Content w={"100%"} bg="#d4e0f5">
                     <Modal.CloseButton />
-                    <Modal.Body marginTop={"10%"} padding={5} >
+                    <Modal.Body marginTop={"10%"} padding={5} > */}
+                <View style={globalStyles.centeredView} >
+                    <View style={globalStyles.modalView} >
                         <View flexDirection={"row"} flexWrap="wrap" alignSelf={"center"} justifyContent="space-evenly">
                             {datashow.map((product, index) =>
                                 <Pressable
@@ -107,66 +112,108 @@ const AddModal = ({
 
                             }
                         </View>
-
-                        <ScrollView horizontal>
-                            <View flexDirection={"row"} mt="1%">
-                                {pages.map((page, index) =>
-                                    <Pressable onPress={() => pagination(index + 1)}
-                                        style={{
-                                            width: 45,
-                                            height: 45,
-                                            justifyContent: "center",
-                                            borderColor: "#000",
-                                            marginHorizontal: 1,
-                                            backgroundColor: "#022760"
-                                        }}
-                                        key={index}
-                                    >
-                                        <Text textAlign={"center"}
-                                            bold
-                                            color={"#FFF"}
+                        <View h={45}>
+                            <ScrollView horizontal>
+                                <View flexDirection={"row"} mt="1%">
+                                    {pages.map((page, index) =>
+                                        <Pressable onPress={() => pagination(index + 1)}
+                                            style={{
+                                                width: 45,
+                                                height: 45,
+                                                justifyContent: "center",
+                                                borderColor: "#000",
+                                                marginHorizontal: 1,
+                                                backgroundColor: "#022760"
+                                            }}
+                                            key={index}
                                         >
-                                            {index + 1}
-                                        </Text>
-                                    </Pressable>
-                                )
-                                }
-                            </View>
-                        </ScrollView>
-                    </Modal.Body>
+                                            <Text textAlign={"center"}
+                                                bold
+                                                color={"#FFF"}
+                                            >
+                                                {index + 1}
+                                            </Text>
+                                        </Pressable>
+                                    )
+                                    }
+                                </View>
+                            </ScrollView>
+                        </View>
 
-                </Modal.Content>
-            </Modal >
-
-            <Modal isOpen={auxiliarModal} onClose={() => setAuxiliarModal(!auxiliarModal)} >
-                <Modal.Content w={"100%"} bg="#d4e0f5">
-                    <View mt="5%" style={[globalStyles.inputContainer, { width: "70%" }]}>
-                        <TextInput
-                            placeholder='Cantidad de productos'
-                            style={globalStyles.inputField}
-                            placeholderTextColor="#FFF"
-                            onChangeText={(text) => setAmount(text)}
-                            keyboardType="numeric"
-                        />
                         <AnimatedButton
-                            onPress={() => { validateData() }}
+                            onPress={() => { setShowModal(!showModal) }}
                         >
-                            <View style={globalStyles.buttonStyle}
+                            <View style={[globalStyles.buttonStyle, { width: 100 }]}
                             >
                                 <Text
                                     textAlign={"center"}
                                     color="#FFF"
                                     fontSize={17}
                                 >
-                                    Agregar
+                                    Cerrar
                                 </Text>
                             </View>
 
                         </AnimatedButton>
+                        {/* </Modal.Body>
 
+                </Modal.Content> */}
                     </View>
-                </Modal.Content>
 
+                </View>
+            </Modal >
+
+            <Modal visible={auxiliarModal} onRequestClose={() => setAuxiliarModal(!auxiliarModal)}
+                transparent={true}
+                animationType="slide"
+            >
+                {/* <Modal.Content w={"100%"} bg="#d4e0f5"> */}
+                <View style={globalStyles.centeredView}>
+                    <View style={globalStyles.modalView}>
+                        <View mt="5%" style={[globalStyles.inputContainer, { width: "70%" }]}>
+                            <TextInput
+                                placeholder='Cantidad de productos'
+                                style={globalStyles.inputField}
+                                placeholderTextColor="#FFF"
+                                onChangeText={(text) => setAmount(text)}
+                                keyboardType="numeric"
+                            />
+                            <AnimatedButton
+                                onPress={() => { validateData() }}
+                            >
+                                <View style={globalStyles.buttonStyle}
+                                >
+                                    <Text
+                                        textAlign={"center"}
+                                        color="#FFF"
+                                        fontSize={17}
+                                    >
+                                        Agregar
+                                    </Text>
+                                </View>
+
+                            </AnimatedButton>
+
+                            <AnimatedButton
+                                onPress={() => { setAuxiliarModal(!auxiliarModal) }}
+                            >
+                                <View style={globalStyles.buttonStyle}
+                                >
+                                    <Text
+                                        textAlign={"center"}
+                                        color="#FFF"
+                                        fontSize={17}
+                                    >
+                                        Cerrar
+                                    </Text>
+                                </View>
+
+                            </AnimatedButton>
+
+                        </View>
+                        {/* </Modal.Content> */}
+                    </View>
+                </View>
             </Modal>
 
         </>

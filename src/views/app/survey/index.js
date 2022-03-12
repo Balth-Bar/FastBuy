@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, ScrollView, Button, useToast, Modal } from 'native-base';
 import globalStyles from '../../../globalStyles';
-import { TextInput } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AnimatedButton from '../../shared/AnimatedButton';
 import { AppContext } from '../../../../context/appContext/appState';
@@ -30,34 +30,47 @@ const Survey = ({
 
     const toast = useToast();
 
-    const showAlert = (title, description, status) => {
-        toast.show({
-            placement: "top",
-            title,
-            description,
-            status,
-        })
-    }
+    // const showAlert = (title, description, status) => {
+    //     toast.show({
+    //         placement: "top",
+    //         title,
+    //         description,
+    //         status,
+    //     })
+    // }
 
     const validateData = () => {
-        if (!client) {
-            showAlert("Error", "Nombre del cliente es necesario", "alert")
-            return
+        if (client == "") {
+            Alert.alert(
+                'Error',
+                'Ingrese Nombre del cliente',
+                [
+                    { text: "Ok" }
+                ]
+            )
         }
-        if (products.length == 0) {
-            showAlert("Error", "Agrege productos al pedido", "alert")
-            return
+        else if (products.length == 0) {
+            Alert.alert(
+                'Error',
+                'Agrege productos al pedido',
+                [
+                    { text: "Ok" }
+                ]
+            )
         }
-        const order = {
-            products,
-            client,
-            date,
-            userName,
-            total
+        else {
+            var order = {
+                products,
+                client,
+                date,
+                userName,
+                total
+            }
+            setOrderData([...orderData, order])
+            setProducts([])
+            navigation.navigate("Home")
         }
-        setOrderData([...orderData, order])
-        setProducts([])
-        navigation.goBack()
+
     }
 
     const onChange = (event, selectedDate) => {
@@ -181,21 +194,18 @@ const Survey = ({
                         {formatQuantity(total)}
                     </Text>
                 </View>
-                <AnimatedButton
-                    onPress={() => { validateData() }}
+                <Button
+                    style={globalStyles.buttonStyle}
+                    onPress={() => validateData()}
                 >
-                    <View style={globalStyles.buttonStyle}
+                    <Text
+                        textAlign={"center"}
+                        color="#FFF"
+                        fontSize={"md"}
                     >
-                        <Text
-                            textAlign={"center"}
-                            color="#FFF"
-                            fontSize={"md"}
-                        >
-                            Enviar
-                        </Text>
-                    </View>
-
-                </AnimatedButton>
+                        Enviar
+                    </Text>
+                </Button>
 
                 <AddModal
                     showModal={showModal}

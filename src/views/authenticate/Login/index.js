@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, useToast } from 'native-base';
 import AnimatedButton from '../../shared/AnimatedButton';
 import globalStyles from '../../../globalStyles';
-import { TextInput } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AppContext } from '../../../../context/appContext/appState'
@@ -29,7 +29,7 @@ const Login = ({
 
     const validateData = async () => {
         if (!user || !pass) {
-            showAlert("Error", "Todos los campos son obligatorios", "warning")
+            Alert.alert("Error", "Todos los campos son obligatorios")
             return
         }
         signIn(user)

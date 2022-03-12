@@ -43,11 +43,16 @@ const Sales = ({
         }
         else {
             let initialDate = new Date(date - milsecs)
+            // initialDate.setHours(0, 0, 0, 0)
             filterData = orderData
                 .filter((order) => {
                     let orderData = order.date
+                    orderData.setMinutes(0)
                     let finalDate = new Date(date)
-
+                    // finalDate.setHours(0, 0, 0, 0)
+                    console.log(initialDate)
+                    console.log(finalDate)
+                    console.log(orderData)
                     if (orderData >= initialDate && orderData <= finalDate) {
                         return order
                     }
